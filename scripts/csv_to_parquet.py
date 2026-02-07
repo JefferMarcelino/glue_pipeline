@@ -7,14 +7,14 @@ from awsglue.job import Job
 from pyspark.sql.functions import col, to_date
 from pyspark.sql.types import IntegerType, DoubleType, TimestampType
 
-## @params: [JOB_NAME]
-args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+## @params: [JOB_NAME, BUCKET_NAME]
+args = getResolvedOptions(sys.argv, ['JOB_NAME', 'BUCKET_NAME'])
 
 sc = SparkContext()
 glueContext = GlueContext(sc)
 spark = glueContext.spark_session
 
-bucket_name = "sales-data-lake-jm"
+bucket_name = args['BUCKET_NAME']
 raw_path = f"s3://{bucket_name}/raw/"
 processed_path = f"s3://{bucket_name}/processed/"
 errors_path = f"s3://{bucket_name}/errors/"

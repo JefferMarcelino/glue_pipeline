@@ -81,6 +81,7 @@ resource "aws_glue_job" "csv_to_parquet" {
     "--job-language"                  = "python"
     "--TempDir"                       = "s3://${aws_s3_bucket.data_bucket.bucket}/processed/temp/"
     "--job-bookmark-option"           = "job-bookmark-enable"
+    "--BUCKET_NAME"                   = aws_s3_bucket.data_bucket.bucket
   }
 
   execution_property {
